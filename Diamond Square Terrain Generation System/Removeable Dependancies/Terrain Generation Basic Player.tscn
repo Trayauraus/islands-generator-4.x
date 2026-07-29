@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://blmgyta2bc2w6"]
+
+[ext_resource type="Script" uid="uid://dqm1o3u1s8ysh" path="res://Diamond Square Terrain Generation System/Removeable Dependancies/Player.gd" id="1_nqt0f"]
+
+[sub_resource type="CapsuleShape3D" id="4"]
+
+[sub_resource type="CapsuleMesh" id="3"]
+
+[node name="Player" type="CharacterBody3D" unique_id=2043399028]
+script = ExtResource("1_nqt0f")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="." unique_id=1489312617]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.89462e-15)
+shape = SubResource("4")
+
+[node name="MeshInstance" type="MeshInstance3D" parent="." unique_id=658667772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("3")
+
+[node name="Egocam" type="Camera3D" parent="." unique_id=1252642539]
+transform = Transform3D(1, 0, 0, 0, 0.9965554, 0.082930036, 0, -0.082930036, 0.9965554, 0, 1.4955089, -0.5175647)
+far = 400.0

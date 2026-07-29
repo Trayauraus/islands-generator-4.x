@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Diamond Square Test"
+config/version="4.7"
+run/main_scene="res://Diamond Square Terrain Generation System/Terrain Generation Scene.tscn"
+config/features=PackedStringArray("4.7")
+
+[file_customization]
+
+folder_colors={
+"res://Diamond Square Terrain Generation System/": "blue",
+"res://Diamond Square Terrain Generation System/Removeable Dependancies/": "red",
+"res://Diamond Square Terrain Generation System/Removeable Dependancies/UI/": "green",
+"res://addons/": "pink"
+}
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/driver/driver_name="\"Vulkan\""
+vram_compression/import_etc=true
+environment/default_environment="res://default_env.tres"

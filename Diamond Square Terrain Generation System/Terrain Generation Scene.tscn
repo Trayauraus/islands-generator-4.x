@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://cyget2asyiq21"]
+
+[ext_resource type="Environment" uid="uid://bdy4rucio8bss" path="res://Diamond Square Terrain Generation System/Terrain Generation World Env.tres" id="1_au3ee"]
+[ext_resource type="Material" uid="uid://b4y2hyndc1qwp" path="res://Diamond Square Terrain Generation System/Removeable Dependancies/water_material.tres" id="2_25phc"]
+[ext_resource type="Script" uid="uid://br31sthnl548s" path="res://Diamond Square Terrain Generation System/Terrain.gd" id="3_ha3ps"]
+[ext_resource type="PackedScene" uid="uid://blmgyta2bc2w6" path="res://Diamond Square Terrain Generation System/Removeable Dependancies/Terrain Generation Basic Player.tscn" id="4_au3ee"]
+[ext_resource type="Script" uid="uid://coa0bjxxbf1sv" path="res://Diamond Square Terrain Generation System/Removeable Dependancies/UI/Roughness_slider.gd" id="5_25phc"]
+
+[sub_resource type="PlaneMesh" id="5"]
+size = Vector2(4, 4)
+
+[node name="Main" type="Node3D" unique_id=697291673]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1548690451]
+environment = ExtResource("1_au3ee")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1776275129]
+transform = Transform3D(-0.77228, -0.33938506, -0.53703016, -0.59714, 0.67630386, 0.43131995, 0.216812, 0.65378195, -0.72495633, 0.550848, 5.46678, -11.3522)
+light_indirect_energy = 0.5
+light_specular = 0.206
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_max_distance = 300.0
+
+[node name="Water" type="MeshInstance3D" parent="." unique_id=677713074]
+transform = Transform3D(64, 0, 0, 0, 1, 0, 0, 0, 64, 64, 3, -64)
+material_override = ExtResource("2_25phc")
+mesh = SubResource("5")
+
+[node name="Terrain" type="Node3D" parent="." unique_id=1201352966]
+script = ExtResource("3_ha3ps")
+terrain_material_file = "uid://vrfl1hu7bhtt"
+debug_prints = false
+
+[node name="Camera" type="Camera3D" parent="Terrain" unique_id=1146509335]
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 64, 64, 64)
+far = 500.0
+
+[node name="Player" parent="Terrain" unique_id=2043399028 instance=ExtResource("4_au3ee")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="UI" type="Control" parent="." unique_id=84512770]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextPanel" type="Panel" parent="UI" unique_id=222944233]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.014
+anchor_top = 0.031000001
+anchor_right = 0.24000001
+anchor_bottom = 0.17300001
+offset_left = -0.12800026
+offset_top = -0.08800125
+offset_right = 0.519989
+offset_bottom = -0.104003906
+
+[node name="Space Label" type="RichTextLabel" parent="UI" unique_id=388661835]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07
+anchor_top = 0.14500001
+anchor_right = 0.149
+anchor_bottom = 0.18200001
+offset_left = -67.64
+offset_top = -75.96001
+offset_right = 104.62198
+offset_bottom = -75.936005
+bbcode_enabled = true
+text = "Press Space to Choose New Seed"
+horizontal_alignment = 1
+
+[node name="Roughness" type="RichTextLabel" parent="UI" unique_id=68160374]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07
+anchor_top = 0.14500001
+anchor_right = 0.149
+anchor_bottom = 0.18200001
+offset_left = -62.64
+offset_top = -34.960007
+offset_right = -62.64801
+offset_bottom = -34.936005
+bbcode_enabled = true
+text = "Roughness:"
+horizontal_alignment = 1
+
+[node name="Roughness_slider" type="HSlider" parent="UI" unique_id=64104235]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.071
+anchor_top = 0.18100001
+anchor_right = 0.148
+anchor_bottom = 0.22800002
+offset_left = -62.792
+offset_top = -35.28801
+offset_right = -63.496002
+offset_bottom = -34.744003
+min_value = 1.7
+max_value = 2.7
+step = 0.1
+value = 2.2
+scrollable = false
+tick_count = 5
+ticks_on_borders = true
+script = ExtResource("5_25phc")
+
+[connection signal="mouse_exited" from="UI/Roughness_slider" to="UI/Roughness_slider" method="_on_Roughness_slider_mouse_exited"]
+[connection signal="value_changed" from="UI/Roughness_slider" to="Terrain" method="_on_Roughness_slider_value_changed"]
